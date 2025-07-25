@@ -547,11 +547,14 @@ def admin_panel(update: Update, context: CallbackContext):
 from telegram.ext import Application  # sigurohu që ta ke importuar në fillim
 
 def main():
+    print("🟢 Nisja e bot-it...")
     application = Application.builder().token(TOKEN).build()
-
+    print("📡 Handlerat po shtohen...")
+    
     application.add_handler(CommandHandler('start', start))
     application.add_handler(CommandHandler('broadcast', broadcast))
     application.add_handler(CallbackQueryHandler(button_handler))
 
+    print("▶️ Po nis polling...")
     application.run_polling()
-    logger.info("Bot është online.")
+    print("🔴 Bot u mbyll.")
