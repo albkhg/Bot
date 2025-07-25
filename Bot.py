@@ -544,17 +544,14 @@ def admin_panel(update: Update, context: CallbackContext):
 
 # ----------- Main -----------
 
+from telegram.ext import Application  # sigurohu që ta ke importuar në fillim
+
 def main():
-    updater = Updater(TOKEN)
-    dp = updater.dispatcher
+    application = Application.builder().token(TOKEN).build()
 
-    dp.add_handler(CommandHandler('start', start))
-    dp.add_handler(CommandHandler('broadcast', broadcast, pass_args=True))
-    dp.add_handler(CallbackQueryHandler(button_handler))
+    application.add_handler(CommandHandler('start', start))
+    application.add_handler(CommandHandler('broadcast', broadcast))
+    application.add_handler(CallbackQueryHandler(button_handler))
 
-    updater.start_polling()
+    application.run_polling()
     logger.info("Bot është online.")
-    updater.idle()
-
-if __name__ == '__main__':
-    main()
